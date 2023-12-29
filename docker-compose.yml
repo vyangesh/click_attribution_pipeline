@@ -1,0 +1,10 @@
+version: "2.2"
+services:
+
+  database:
+    container_name: postgres_clik_attribution
+    image: postgres_clik_attribution
+    build:
+      context: ./container/postgres/
+    volumes:
+      - ./SQL/init.sql:/docker-entrypoint-initdb.d/init.sql
