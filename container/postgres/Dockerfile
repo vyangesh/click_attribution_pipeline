@@ -1,11 +1,16 @@
+# image_name : postgres_clik_attribution
 # Base image: Official PostgreSQL image
 FROM postgres:16.1
 
-# Optional: Expose PostgreSQL port for external access
+# Expose PostgreSQL port for external access
 EXPOSE 5432
 
-# Copy SQL file from host machine to container
-COPY SQL/init.sql /docker-entrypoint-initdb.d/init.sql
+# Set environment variables for superuser credentials
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
 
-# Command to run when the container starts
-CMD ["postgres"]
+# Optional: Set a database name
+ENV POSTGRES_DB=postgres
+
+# Avoid interactive password prompts during image build
+ENV PGPASSWORD=$POSTGRES_PASSWORD
